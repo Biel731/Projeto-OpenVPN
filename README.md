@@ -12,7 +12,6 @@ Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
 
 &nbsp;
-
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA
@@ -27,7 +26,6 @@ Em uma infraestrutura de VPN, a CA cria e assina:
 Esta assinatura garante que só certificados emitidos pela CA são aceitos, prevenindo conexões não autorizadas.
 
 &nbsp;
-
 ### 1.2 Criando a CA no pfSense
 
 No pfSense, acesse:
@@ -37,7 +35,6 @@ No pfSense, acesse:
 O assistente vai guiar a criação da CA. É fundamental preencher corretamente os dados da CA, como nome, validade, etc. A CA será usada para emitir os certificados seguintes.
 
 &nbsp;
-
 ### 1.3 Criando o certificado do servidor
 
 No mesmo assistente, você deve criar o certificado do servidor VPN:
@@ -82,4 +79,22 @@ Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve
 
 **Sendo assim, teremos dois certificados assinados pela CA: o certificado do server e o certificado do usuário:**
 
-[certificados.png](images/certificados.png)
+![certificados.png](images/certificados.png)
+
+## 📦 Etapa 3: Exportando o perfil de conexão do cliente.
+O arquivo `.ovpn` é o perfil que contém:
+
+- Configurações de conexão
+- Certificados (CA, usuário e chave privada)
+- Parâmetros de criptografia e autenticação.
+
+No pfSense:
+
+`VPN > OpenVPN > Client Export`
+
+- Confirme que o perfil exportado aponta para o servidor correto e escolha o modo “most clients”.
+
+![mostClients(1)](images/mostClients(1).png)
+![mostClients(2)](images/mostClients(2).png)
+
+> Exporte esse arquivo para o host externo que está na rede WAN.
