@@ -173,7 +173,10 @@ Como podemos ver, o ping ocorreu corretamente, sem nenhuma perda de pacotes. �
 Além disso, se executarmos o comando `ip route` veremos que um dos gateways do nosso host WAN é o ip 192.168.10.104, que é justamente o ip da interface WAN do firewall.
 
 Por fim, vamos fazer uma varredura nas portas que estão abertas no metasploitable 2:
+
 ![varreduraMeta](images/varreduraMeta.png)
+
+&nbsp;
 
 ### 🔎 Etapa 7: Análise manual dos certificados
 
@@ -199,6 +202,8 @@ Isso mostra:
 - Titular (nome do usuário).
 
 ![certfUser](images/certffUser.png)
+
+&nbsp;
 
 ## ✅ Considerações finais
 
