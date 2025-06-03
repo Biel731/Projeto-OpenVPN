@@ -72,8 +72,8 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 - **Use TLS Key:** TLS (Transport Layer Security) é o protocolo responsável por criar um canal seguro antes mesmo da autenticação. O uso de uma chave TLS estática evita ataques como DoS e replay.
     - Obs.: Vale ressaltar que a Autoridade Certificadora que você criou deve validar o certificado que você está criando, como é mostrado nos últimos campos da imagem.
   
-&nbsp;
 ---
+&nbsp;
 
 ## 👤 Etapa 2: Criando perfis de usuários com certificados individuais.
 
@@ -97,8 +97,8 @@ Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve
 
 ![certificados.png](images/certificados.png)
 
-&nbsp;
 ---
+&nbsp;
 
 ## 📦 Etapa 3: Exportando o perfil de conexão do cliente.
 O arquivo `.ovpn` é o perfil que contém:
@@ -118,8 +118,8 @@ No pfSense:
 
 > Exporte esse arquivo para o host externo que está na rede WAN.
 
-&nbsp;
 ---
+&nbsp;
 
 ## 🔥 Etapa 4: Configurando as regras de firewall.
 
