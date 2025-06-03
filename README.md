@@ -10,9 +10,9 @@ Em seguida, será realizada a troca de chaves TLS entre o cliente e o servidor d
 Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro e rápido (com criptografia e usando UDP) entre as duas pontas, sendo atribuído ao cliente o IP 10.10.10.X/24.
 
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
-
-
-### 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
+<br>  
+<br>
+## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA
 
@@ -40,7 +40,7 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 - **Server Certificate:** selecione a CA criada para garantir que o certificado seja assinado e validado.
     
 ![image.png](images/image_1.3.png)
-
+<br>
 
 - **Criptografia:** configuramos o servidor para usar AES-256 com SHA-256.
 
@@ -48,3 +48,11 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 
 - **AES (Advanced Encryption Standard) 256 bits**: padrão de criptografia simétrica altamente seguro usado mundialmente, que cifra os dados para manter confidencialidade.
 - **SHA-256 (Secure Hash Algorithm 256 bits):** algoritmo de hash que garante a integridade dos dados, detectando qualquer alteração durante o trânsito.
+<br>
+
+- **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
+- **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
+- [redirectGateway.png](images/redirectGateway.png)
+<br>
+- **Use TLS Key:** TLS (Transport Layer Security) é o protocolo responsável por criar um canal seguro antes mesmo da autenticação. O uso de uma chave TLS estática evita ataques como DoS e replay.
+    - Obs.: Vale ressaltar que a Autoridade Certificadora que você criou deve validar o certificado que você está criando, como é mostrado nos últimos campos da imagem.
