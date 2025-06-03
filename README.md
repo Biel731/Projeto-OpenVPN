@@ -24,8 +24,8 @@ Em uma infraestrutura de VPN, a CA cria e assina:
 - O certificado de cada **cliente VPN** (que autentica cada usuário/host)
 
 Esta assinatura garante que só certificados emitidos pela CA são aceitos, prevenindo conexões não autorizadas.
+<br>
 
-&nbsp;
 ### 1.2 Criando a CA no pfSense
 
 No pfSense, acesse:
@@ -33,8 +33,8 @@ No pfSense, acesse:
 `VPN > OpenVPN > Wizards`
 
 O assistente vai guiar a criação da CA. É fundamental preencher corretamente os dados da CA, como nome, validade, etc. A CA será usada para emitir os certificados seguintes.
+<br>
 
-&nbsp;
 ### 1.3 Criando o certificado do servidor
 
 No mesmo assistente, você deve criar o certificado do servidor VPN:
@@ -77,9 +77,12 @@ Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve
     Ainda nisso, caso seja necessário revogar o certificado do usuário, vá em 
     `System > Certificates > Certificates > Certificate Revocation`
 
+
 **Sendo assim, teremos dois certificados assinados pela CA: o certificado do server e o certificado do usuário:**
 
 ![certificados.png](images/certificados.png)
+
+&nbsp;
 
 ## 📦 Etapa 3: Exportando o perfil de conexão do cliente.
 O arquivo `.ovpn` é o perfil que contém:
@@ -98,3 +101,26 @@ No pfSense:
 ![mostClients(2)](images/mostClients(2).png)
 
 > Exporte esse arquivo para o host externo que está na rede WAN.
+
+## 🔥 Etapa 4: Configurando as regras de firewall.
+
+### 4.1 Na interface WAN
+
+Para permitir a entrada de conexões VPN, crie uma regra:
+
+- **Source:** qualquer (`any`) — porque clientes externos podem ter IPs variados
+- **Destination:** endereço WAN do firewall
+- **Protocolo:** UDP na porta 1194 (padrão OpenVPN)
+
+Isso autoriza os clientes a se conectarem ao servidor.
+![ruleWAN](images/ruleWAN.png)
+<br>
+
+### 4.2 Na interface OpenVPN
+
+Essa regra controla o que clientes VPN podem acessar na rede interna:
+
+- **Source:** rede do túnel VPN (`10.10.10.0/24`)
+- **Destination:** sub-rede LAN
+
+Permite o acesso dos clientes aos dispositivos internos.
