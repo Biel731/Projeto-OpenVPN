@@ -52,7 +52,8 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 > Continuando com as configurações...
 - **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
 - **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
-[redirectGateway.png](images/redirectGateway.png)
+  
+![redirectGateway.png](images/redirectGateway.png)
 
 <br>
 
