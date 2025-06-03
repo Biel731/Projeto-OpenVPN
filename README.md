@@ -10,8 +10,9 @@ Em seguida, será realizada a troca de chaves TLS entre o cliente e o servidor d
 Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro e rápido (com criptografia e usando UDP) entre as duas pontas, sendo atribuído ao cliente o IP 10.10.10.X/24.
 
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
-<br>  
-<br>
+
+&nbsp;
+
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA
@@ -52,9 +53,9 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
     - **AES (Advanced Encryption Standard) 256 bits**: padrão de criptografia simétrica altamente seguro usado mundialmente, que cifra os dados para manter confidencialidade.
     - **SHA-256 (Secure Hash Algorithm 256 bits):** algoritmo de hash que garante a integridade dos dados, detectando qualquer alteração durante o trânsito.
 
-> Continuando com as configurações...
 - **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
 - **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
+
 ![redirectGateway.png](images/redirectGateway.png)
 
 - **Use TLS Key:** TLS (Transport Layer Security) é o protocolo responsável por criar um canal seguro antes mesmo da autenticação. O uso de uma chave TLS estática evita ataques como DoS e replay.
@@ -70,4 +71,15 @@ Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve
     1. `System > User Manager > Add`
 2. Crie um usuário com nome e senha.
 3. Clique em Add Certificate e vincule o certificado gerado à CA criada anteriormente.
-![userCertif1.png](images/userCertf1.png)
+
+    ![userCertif1.png](images/userCertf1.png)
+
+    > Importância dos certificados individuais:
+    Cada certificado serve como uma identidade digital única. Isso possibilita revogar acessos específicos, controlar permissões e rastrear usuários na rede.
+
+    Ainda nisso, caso seja necessário revogar o certificado do usuário, vá em 
+    `System > Certificates > Certificates > Certificate Revocation`
+
+**Sendo assim, teremos dois certificados assinados pela CA: o certificado do server e o certificado do usuário:**
+
+[certificados.png](images/certificados.png)
