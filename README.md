@@ -24,7 +24,7 @@ Em uma infraestrutura de VPN, a CA cria e assina:
 - O certificado de cada **cliente VPN** (que autentica cada usuário/host)
 
 Esta assinatura garante que só certificados emitidos pela CA são aceitos, prevenindo conexões não autorizadas.
-<br>
+&nbsp;
 
 ### 1.2 Criando a CA no pfSense
 
@@ -33,7 +33,7 @@ No pfSense, acesse:
 `VPN > OpenVPN > Wizards`
 
 O assistente vai guiar a criação da CA. É fundamental preencher corretamente os dados da CA, como nome, validade, etc. A CA será usada para emitir os certificados seguintes.
-<br>
+&nbsp;
 
 ### 1.3 Criando o certificado do servidor
 
@@ -42,23 +42,24 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 - **Server Certificate:** selecione a CA criada para garantir que o certificado seja assinado e validado.
     
 ![image.png](images/image_1.3.png)
-<br>
+
+&nbsp;
 
 - **Criptografia:** configuramos o servidor para usar AES-256 com SHA-256.
 
-> Observação: Por que AES-256 e SHA-256?
+    > Observação: Por que AES-256 e SHA-256?
 
-- **AES (Advanced Encryption Standard) 256 bits**: padrão de criptografia simétrica altamente seguro usado mundialmente, que cifra os dados para manter confidencialidade.
-- **SHA-256 (Secure Hash Algorithm 256 bits):** algoritmo de hash que garante a integridade dos dados, detectando qualquer alteração durante o trânsito.
+    - **AES (Advanced Encryption Standard) 256 bits**: padrão de criptografia simétrica altamente seguro usado mundialmente, que cifra os dados para manter confidencialidade.
+    - **SHA-256 (Secure Hash Algorithm 256 bits):** algoritmo de hash que garante a integridade dos dados, detectando qualquer alteração durante o trânsito.
 
 > Continuando com as configurações...
 - **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
 - **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
-    - ![redirectGateway.png](images/redirectGateway.png)
+![redirectGateway.png](images/redirectGateway.png)
 
 - **Use TLS Key:** TLS (Transport Layer Security) é o protocolo responsável por criar um canal seguro antes mesmo da autenticação. O uso de uma chave TLS estática evita ataques como DoS e replay.
     - Obs.: Vale ressaltar que a Autoridade Certificadora que você criou deve validar o certificado que você está criando, como é mostrado nos últimos campos da imagem.
-<br>
+&nbsp;
 
 ## 👤 Etapa 2: Criando perfis de usuários com certificados individuais.
 
@@ -67,3 +68,5 @@ Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve
 1. Vá para:
     1. `System > User Manager > Add`
 2. Crie um usuário com nome e senha.
+3. Clique em Add Certificate e vincule o certificado gerado à CA criada anteriormente.
+![userCertif1.png](images/userCertf1.png)
