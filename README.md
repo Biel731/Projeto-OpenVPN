@@ -11,7 +11,7 @@ Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro
 
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
 <br>  
-<br>
+
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA
@@ -24,6 +24,7 @@ Em uma infraestrutura de VPN, a CA cria e assina:
 - O certificado de cada **cliente VPN** (que autentica cada usuário/host)
 
 Esta assinatura garante que só certificados emitidos pela CA são aceitos, prevenindo conexões não autorizadas.
+<br>
 
 ### 1.2 Criando a CA no pfSense
 
@@ -32,6 +33,7 @@ No pfSense, acesse:
 `VPN > OpenVPN > Wizards`
 
 O assistente vai guiar a criação da CA. É fundamental preencher corretamente os dados da CA, como nome, validade, etc. A CA será usada para emitir os certificados seguintes.
+<br>
 
 ### 1.3 Criando o certificado do servidor
 
@@ -52,10 +54,16 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 > Continuando com as configurações...
 - **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
 - **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
-  
-![redirectGateway.png](images/redirectGateway.png)
-
-<br>
+    - ![redirectGateway.png](images/redirectGateway.png)
 
 - **Use TLS Key:** TLS (Transport Layer Security) é o protocolo responsável por criar um canal seguro antes mesmo da autenticação. O uso de uma chave TLS estática evita ataques como DoS e replay.
     - Obs.: Vale ressaltar que a Autoridade Certificadora que você criou deve validar o certificado que você está criando, como é mostrado nos últimos campos da imagem.
+<br>
+
+## 👤 Etapa 2: Criando perfis de usuários com certificados individuais.
+
+Para garantir que apenas usuários autorizados acessem a VPN, cada usuário deve possuir seu próprio certificado digital.
+
+1. Vá para:
+    1. `System > User Manager > Add`
+2. Crie um usuário com nome e senha.
