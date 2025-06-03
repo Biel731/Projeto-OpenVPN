@@ -102,6 +102,8 @@ No pfSense:
 
 > Exporte esse arquivo para o host externo que está na rede WAN.
 
+&nbsp;
+
 ## 🔥 Etapa 4: Configurando as regras de firewall.
 
 ### 4.1 Na interface WAN
@@ -113,6 +115,7 @@ Para permitir a entrada de conexões VPN, crie uma regra:
 - **Protocolo:** UDP na porta 1194 (padrão OpenVPN)
 
 Isso autoriza os clientes a se conectarem ao servidor.
+
 ![ruleWAN](images/ruleWAN.png)
 <br>
 
@@ -124,3 +127,5 @@ Essa regra controla o que clientes VPN podem acessar na rede interna:
 - **Destination:** sub-rede LAN
 
 Permite o acesso dos clientes aos dispositivos internos.
+
+![ruleOpenVPN](images/ruleOpenVPN.png)
