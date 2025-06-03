@@ -13,6 +13,21 @@ Com esse IP, e de acordo com as regras configuradas na interface do Firewall e d
 
 &nbsp;
 
+## ✅ Competências Adquiridas com o projeto:
+
+Esse projeto reuniu conceitos importantes de:
+
+- Criptografia simétrica e assimétrica
+- Infraestrutura de chave pública (PKI)
+- Configuração segura de VPN com OpenVPN
+- Controle de acesso via certificados
+- Regras de firewall para proteção da rede
+- TCP over TCP
+- Criptografia
+- Autenticação de Certificados.
+
+&nbsp;
+  
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA:
@@ -204,18 +219,5 @@ Isso mostra:
 ![certfUser](images/certffUser.png)
 
 &nbsp;
-
-## ✅ Considerações finais
-
-Esse projeto reuniu conceitos importantes de:
-
-- Criptografia simétrica e assimétrica
-- Infraestrutura de chave pública (PKI)
-- Configuração segura de VPN com OpenVPN
-- Controle de acesso via certificados
-- Regras de firewall para proteção da rede
-- TCP over TCP
-- Criptografia
-- Autenticação de Certificados;
 
 Além disso, a validação prática com a máquina Metasploitable demonstrou a eficácia da solução, possibilitando acesso e reconhecimento da rede interna remotamente.
