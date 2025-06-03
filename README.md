@@ -1,6 +1,5 @@
 # Projeto: Criar uma VPN com OpenVPN no firewall Pfsense CE 2.7.2.
 
-
 ## Funcionalidade:
 
 O host externo (interface WAN) executará o arquivo .ovpn (configuração da VPN já contendo o cadastro do usuário), o que fará com que pacotes UDP sejam enviados pela porta 1194 (openvpn) ao firewall. Este, por sua vez, permitirá a entrada desses dados via UDP pela WAN, conforme previsto por uma regra de liberação desse protocolo.
