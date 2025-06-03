@@ -11,7 +11,6 @@ Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro
 
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
 
-&nbsp;
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
 ### 1.1 Entendendo o papel da CA
@@ -129,3 +128,12 @@ Essa regra controla o que clientes VPN podem acessar na rede interna:
 Permite o acesso dos clientes aos dispositivos internos.
 
 ![ruleOpenVPN](images/ruleOpenVPN.png)
+
+## 🧪 Etapa 5: Conectando via cliente OpenVPN
+
+No host externo (no mesmo diretório onde está o arquivo .ovpn), execute:
+`sudo openvpn --config <nome do arquivo.ovpn>`
+
+- Informe usuário e senha.
+- Se aparecer “Initialization Sequence Completed”, a conexão está estabelecida
+![imgHostWan](images/imgHostWan.png)
