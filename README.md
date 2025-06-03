@@ -11,9 +11,11 @@ Concluídas essas etapas de validação, será estabelecido um túnel VPN seguro
 
 Com esse IP, e de acordo com as regras configuradas na interface do Firewall e do OpenVPN, o tráfego do cliente terá como destino as sub-redes (hosts) da interface LAN. Assim, o cliente poderá se conectar diretamente e realizar uma varredura (via Nmap) das portas abertas no Metasploitable 2, que está localizado atrás do firewall, no IP 192.168.1.101.
 
+&nbsp;
+
 ## 📍 Etapa 1: Criando a Autoridade Certificadora (CA) e Certificados Digitais
 
-### 1.1 Entendendo o papel da CA
+### 1.1 Entendendo o papel da CA:
 
 A **Autoridade Certificadora (CA)** é o órgão central que emite certificados digitais para autenticar identidades na rede. Ela atua como uma "terceira parte confiável", validando que os certificados entregues são legítimos.
 
@@ -23,9 +25,8 @@ Em uma infraestrutura de VPN, a CA cria e assina:
 - O certificado de cada **cliente VPN** (que autentica cada usuário/host)
 
 Esta assinatura garante que só certificados emitidos pela CA são aceitos, prevenindo conexões não autorizadas.
-<br>
 
-### 1.2 Criando a CA no pfSense
+### 1.2 Criando a CA no pfSense:
 
 No pfSense, acesse:
 
@@ -34,7 +35,7 @@ No pfSense, acesse:
 O assistente vai guiar a criação da CA. É fundamental preencher corretamente os dados da CA, como nome, validade, etc. A CA será usada para emitir os certificados seguintes.
 <br>
 
-### 1.3 Criando o certificado do servidor
+### 1.3 Criando o certificado do servidor:
 
 No mesmo assistente, você deve criar o certificado do servidor VPN:
 
@@ -105,7 +106,7 @@ No pfSense:
 
 ## 🔥 Etapa 4: Configurando as regras de firewall.
 
-### 4.1 Na interface WAN
+### 4.1 Na interface WAN:
 
 Para permitir a entrada de conexões VPN, crie uma regra:
 
@@ -118,7 +119,7 @@ Isso autoriza os clientes a se conectarem ao servidor.
 ![ruleWAN](images/ruleWAN.png)
 <br>
 
-### 4.2 Na interface OpenVPN
+### 4.2 Na interface OpenVPN:
 
 Essa regra controla o que clientes VPN podem acessar na rede interna:
 
@@ -129,6 +130,8 @@ Permite o acesso dos clientes aos dispositivos internos.
 
 ![ruleOpenVPN](images/ruleOpenVPN.png)
 
+&nbsp;
+
 ## 🧪 Etapa 5: Conectando via cliente OpenVPN
 
 No host externo (no mesmo diretório onde está o arquivo .ovpn), execute:
@@ -136,4 +139,78 @@ No host externo (no mesmo diretório onde está o arquivo .ovpn), execute:
 
 - Informe usuário e senha.
 - Se aparecer “Initialization Sequence Completed”, a conexão está estabelecida
+
 ![imgHostWan](images/imgHostWan.png)
+
+Essa mensagem indica que:
+
+- O túnel TLS foi configurado
+- Os certificados foram validados
+- O túnel VPN (via CDHE) está ativo
+- As regras de firewall permitem o tráfego.
+
+&nbsp;
+
+### 🧭 Etapa 6: Verificação da conectividade
+
+Após conectar:
+
+- O cliente recebe um IP na faixa do túnel (no caso: `10.10.10.2`).
+- Use `ip a` para verificar interfaces de rede.
+
+![ipHostWan](images/ipHostWan.png)
+
+- Teste a conectividade com a interface LAN (192.168.1.1) e o metasploitable no ip 192.168.1.101:
+
+`ping 192.168.1.1` #gateway LAN
+`ping 192.168.1.101` #metasploitable interno
+
+![hostsInternos](images/hostsInternos.png)
+![ipMeta](images/ipMeta.png)
+
+Como podemos ver, o ping ocorreu corretamente, sem nenhuma perda de pacotes. 🙂
+
+Além disso, se executarmos o comando `ip route` veremos que um dos gateways do nosso host WAN é o ip 192.168.10.104, que é justamente o ip da interface WAN do firewall.
+
+Por fim, vamos fazer uma varredura nas portas que estão abertas no metasploitable 2:
+![varreduraMeta](images/varreduraMeta.png)
+
+### 🔎 Etapa 7: Análise manual dos certificados
+
+Os certificados digitais contêm:
+
+- **Chave pública:** usada para criptografia e verificação
+- **Chave privada:** sigilosa, usada para descriptografar dados
+- **Assinatura da CA:** garante autenticidade
+- **Dados do emissor (Issuer) e do titular (Subject)**
+- **Validade**
+
+Extraia os blocos `<ca>`, `<cert>`, `<key>` do `.ovpn` para um arquivo `.pem`, e execute:
+
+`openssl x509 -in arquivo.pem -text -noout`
+
+Isso mostra:
+
+- Versão do certificado
+- Número serial (único)
+- Algoritmo de assinatura (SHA256 + AES256)
+- Emissor (CA)
+- Validade (ex.: 10 anos)
+- Titular (nome do usuário).
+
+![certfUser](images/certffUser.png)
+
+## ✅ Considerações finais
+
+Esse projeto reuniu conceitos importantes de:
+
+- Criptografia simétrica e assimétrica
+- Infraestrutura de chave pública (PKI)
+- Configuração segura de VPN com OpenVPN
+- Controle de acesso via certificados
+- Regras de firewall para proteção da rede
+- TCP over TCP
+- Criptografia
+- Autenticação de Certificados;
+
+Além disso, a validação prática com a máquina Metasploitable demonstrou a eficácia da solução, possibilitando acesso e reconhecimento da rede interna remotamente.
