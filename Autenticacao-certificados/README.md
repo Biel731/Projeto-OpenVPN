@@ -1,4 +1,4 @@
-# Projeto: Criar uma VPN com OpenVPN no firewall Pfsense CE 2.7.2.
+# Projeto: Criar uma VPN OpenVPN com autenticação via certificados no firewall Pfsense CE 2.7.2.
 
 ## Funcionalidade:
 
@@ -192,7 +192,11 @@ Por fim, vamos fazer uma varredura nas portas que estão abertas no metasploitab
 
 &nbsp;
 
-### 🔎 Etapa 7: Análise manual dos certificados
+### 🔎 Curiosidade: O que é e como funciona um certificado?
+
+Certificados são documentos assinados por uma Autoridade Certificadora (CA). Ou seja, a CA gera um certificado para o usuário e o assina com sua chave privada (podemos ver isso no bloco <ca> dentro do arquivo .ovpn); em seguida, ela gera outro certificado para o servidor, seguindo os mesmos procedimentos.
+
+Quando o processo de autenticação se inicia, primeiro o usuário valida o servidor verificando se o certificado deste foi assinado pela CA. Se essa validação for bem-sucedida, o fluxo se inverte: o servidor agora valida o certificado do usuário, conferindo a assinatura da mesma CA. Se ambos os processos forem aprovados, a autenticação se conclui e o usuário pode prosseguir com seu objetivo.
 
 Os certificados digitais contêm:
 
