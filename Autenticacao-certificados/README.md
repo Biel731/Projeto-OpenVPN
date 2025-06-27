@@ -20,10 +20,8 @@ Esse projeto reuniu conceitos importantes de:
 - Infraestrutura de chave pública (PKI)
 - Configuração segura de VPN com OpenVPN
 - Controle de acesso via certificados
-- Regras de firewall para proteção da rede
-- TCP over TCP
-- Criptografia
 - Autenticação de Certificados.
+- Regras de firewall para proteção da rede
 
 &nbsp;
   
@@ -63,6 +61,8 @@ No mesmo assistente, você deve criar o certificado do servidor VPN:
 
     - **AES (Advanced Encryption Standard) 256 bits**: padrão de criptografia simétrica altamente seguro usado mundialmente, que cifra os dados para manter confidencialidade.
     - **SHA-256 (Secure Hash Algorithm 256 bits):** algoritmo de hash que garante a integridade dos dados, detectando qualquer alteração durante o trânsito.
+    
+    [Entenda como o algorítimo de criptografia funciona:](/Algorítimo%20AES256%20+%20SHA256.md)
 
 - **IPv4 Tunnel Network:** é a faixa de IP que será atribuída aos clientes VPN ao se conectarem. Escolhi 10.10.10.0/24, uma rede privada dedicada para o túnel VPN, garantindo que não haja conflito com redes existentes.
 - **Redirect Gateway:** ao habilitar essa opção, todo o tráfego do cliente é roteado pela VPN. Isso significa que, além do acesso à rede interna, o cliente passa a ter todo seu tráfego de internet encapsulado na VPN, aumentando a privacidade.
@@ -192,7 +192,7 @@ Por fim, vamos fazer uma varredura nas portas que estão abertas no metasploitab
 
 &nbsp;
 
-### 🔎 Curiosidade: O que é e como funciona um certificado?
+# 🔎 Curiosidade: O que é e como funciona um certificado?
 
 Certificados são documentos assinados por uma Autoridade Certificadora (CA). Ou seja, a CA gera um certificado para o usuário e o assina com sua chave privada (podemos ver isso no bloco <ca> dentro do arquivo .ovpn); em seguida, ela gera outro certificado para o servidor, seguindo os mesmos procedimentos.
 
@@ -222,5 +222,3 @@ Isso mostra:
 ![certfUser](images/certffUser.png)
 
 &nbsp;
-
-Além disso, a validação prática com a máquina Metasploitable demonstrou a eficácia da solução, possibilitando acesso e reconhecimento da rede interna remotamente.
