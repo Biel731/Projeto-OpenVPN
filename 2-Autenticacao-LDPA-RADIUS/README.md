@@ -14,5 +14,6 @@ Se o LDAP confirmar que o usuário e a senha são válidos, o FreeRADIUS retorna
 ## 📍 Etapa 1: Instalando o Plugin FreeRADIUS.
 
 Vá para Package Manager e instale o pacote FreeRADIUS:
-![pacote-FreeRADIUS](/images/pacote_freeRADIUS.png)
+![pacote-FreeRADIUS](images/pacote_freeRADIUS.png)
 
+- **Observação:** As informações do DN e senha foram configuradas na parte do Docker.
