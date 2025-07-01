@@ -19,7 +19,7 @@ Vá para Package Manager e instale o pacote FreeRADIUS:
 
 - **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](/2-Autenticacao-LDPA-RADIUS/config_docker.md)
 
-Visto isso, vamos acessar nosso LDAP por https://<ip_do_ldap>:6443/ ou https://localhosl:6443/.
+Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https://localhosl:6443/`.
 
 ![ldap-login](images/ldap.png)
 
@@ -27,3 +27,23 @@ Visto isso, vamos acessar nosso LDAP por https://<ip_do_ldap>:6443/ ou https://l
 
 ## Etapa 2: Configurando o LDAP.
 
+Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada parte do nosso diretório.
+
+![ldap-DN-completo](images/ldap_dn_completo.png)
+
+### Explicação: 
+
+- **DN (Distinguished Name):** É o endereço completo de um entry no diretório, ou seja o DN seria `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local.` Cada parte antes da vírgula é um RDN.
+- **RDNs (Relative Distinguished Names):** São as etiquetas que compõem o DN. No nosso caso, seria:
+    - **dc=minhaempresa,** **dc=local:** “dc” vem de Domain Component. Define seu domínio LDAP(minhaempresa.local).
+    - **ou=usersEnterprise:** “ou” significa Organizational Unit. É como se fosse uma pasta, onde você pode organizar seu LDAP da forma como queira.
+    - **“cn” significa Common Name**. Geralmente é o nome “amigável” ou “comum” do objeto (aqui, o nome do usuário).
+
+### Visão geral dos tópicos:
+
+| Atributo (RDN) | Significado | Exemplo no seu LDAP |
+| --- | --- | --- |
+| **dc** | Domain Component (parte do domínio) | `dc=minhaempresa,dc=local` |
+| **ou** | Organizational Unit (unidade/pasta) | `ou=usersEnterprise` |
+| **cn** | Common Name (nome comum do objeto) | `cn=lucas luiz` |
+| **DN completo** | Distinguished Name (endereço completo) | `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local` |
