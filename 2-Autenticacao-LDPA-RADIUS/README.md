@@ -19,6 +19,8 @@ Vá para Package Manager e instale o pacote FreeRADIUS:
 
 > **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](configuracoes/config-docker.md)
 
+&nbsp;
+
 Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https://localhost:6443/`.
 
 ![ldap-login](images/ldap.png)
@@ -40,6 +42,8 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
     - **dc=minhaempresa,** **dc=local:** “dc” vem de Domain Component. Define seu domínio LDAP(minhaempresa.local).
     - **ou=usersEnterprise:** “ou” significa Organizational Unit. É como se fosse uma pasta, onde você pode organizar seu LDAP da forma como queira. No nosso caso, é uma pasta onde vamos registrar todos os usuário que vão logar na vpn.
     - **“cn” significa Common Name**. Geralmente é o nome “amigável” ou “comum” do objeto (aqui, o nome do usuário).
+
+&nbsp;
 
 ### Visão geral dos tópicos:
 
@@ -92,6 +96,8 @@ Preencha os campos com essas informações:
 > Observação: Porque “127.0.0.1”?
 > Como mencionado no [começo do projeto](#️-funcionalidade), boa parte da integração será realizada dentro do próprio firewall. Nesse cenário, por se tratar de tráfego interno, utilizamos o endereço de loopback 127.0.0.1, ajustando apenas a porta de destino, como por exemplo para 1812 (ou seja, 127.0.0.1:1812).
 
+&nbsp;
+
 ### O que é um NAS/Client?
 
 É o canal de comunicação entre o OpenVPN e o FreeRADIUS. Como a comunicação ocorre dentro do firewall (OpenVPN → FreeRadius e vice-versa) o ip usado para a transferência de dados é o ip de loopback, alterando apenas a porta de destino.
@@ -112,3 +118,6 @@ Configure assim:
 | Port | `1812` |
 
 Em “Interfaces” é onde configuramos aonde o plugin do FreeRADIUS irá ouvir as solicitações. No nosso caso, definimos que as solicitações seram realizadas na porta 1812, ou seja 127.0.0.1:1812.
+
+&nbsp;
+
