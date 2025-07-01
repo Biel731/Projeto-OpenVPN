@@ -17,7 +17,7 @@ Vá para Package Manager e instale o pacote FreeRADIUS:
 
 ![pacote-FreeRADIUS](images/pacote_freeRADIUS.png)
 
-- **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](configuracoes/config-docker.md)
+> **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](configuracoes/config-docker.md)
 
 Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https://localhost:6443/`.
 
@@ -52,9 +52,11 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 
 &nbsp;
 
-Em `System > User Manager > Authentication Server` clique em `Add` para criar um server de autenticação RADIUS. Preencha assim:
+Vá em `System > User Manager > Authentication Server` clique em `Add`. 
 
 ![server-radius](images/serverRadius.png)
+
+Preencha os campos com essas informações:
 
 | Tópicos | Valores |
 | --- | --- |
@@ -62,10 +64,11 @@ Em `System > User Manager > Authentication Server` clique em `Add` para criar um
 | **Type** | `RADIUS` |
 | **Protocolo** | `PAP`|
 | **Shared Secret** | `Defina uma senha` |
-| **Authentication Port** | `1812 (porta padrão do RADIUS) |
+| **Authentication Port** | `1812 (porta padrão do RADIUS)` |
 
 > **Observação:** Não perca essa senha. Ela serve para autenticação do FreeRADIUS e assinatura dos pacotes RADIUS. Essa senha será usada quando configurarmos o NAS/Client.
 
 &nbsp;
 
-> **Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
+**Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
+
