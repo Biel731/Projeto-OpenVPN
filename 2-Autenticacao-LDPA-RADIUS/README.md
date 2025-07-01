@@ -17,9 +17,9 @@ Vá para Package Manager e instale o pacote FreeRADIUS:
 
 ![pacote-FreeRADIUS](images/pacote_freeRADIUS.png)
 
-- **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](/2-Autenticacao-LDPA-RADIUS/config_docker.md)
+- **Observação:** As informações do DN e senha foram [configuradas na parte do Docker.](configuracoes/config-docker.md)
 
-Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https://localhosl:6443/`.
+Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https://localhost:6443/`.
 
 ![ldap-login](images/ldap.png)
 
@@ -36,7 +36,7 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 - **DN (Distinguished Name):** É o endereço completo de um entry no diretório, ou seja o DN seria `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local.` Cada parte antes da vírgula é um RDN.
 - **RDNs (Relative Distinguished Names):** São as etiquetas que compõem o DN. No nosso caso, seria:
     - **dc=minhaempresa,** **dc=local:** “dc” vem de Domain Component. Define seu domínio LDAP(minhaempresa.local).
-    - **ou=usersEnterprise:** “ou” significa Organizational Unit. É como se fosse uma pasta, onde você pode organizar seu LDAP da forma como queira.
+    - **ou=usersEnterprise:** “ou” significa Organizational Unit. É como se fosse uma pasta, onde você pode organizar seu LDAP da forma como queira. No nosso caso, é uma pasta onde vamos registrar todos os usuário que vão logar na vpn.
     - **“cn” significa Common Name**. Geralmente é o nome “amigável” ou “comum” do objeto (aqui, o nome do usuário).
 
 ### Visão geral dos tópicos:
@@ -47,3 +47,19 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 | **ou** | Organizational Unit (unidade/pasta) | `ou=usersEnterprise` |
 | **cn** | Common Name (nome comum do objeto) | `cn=lucas luiz` |
 | **DN completo** | Distinguished Name (endereço completo) | `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local` |
+
+> **Observação:** Caso queira ver a configuração do LDAP (como foi constrído essa árvore), [clique aqui:](configuracoes/config-ldpa.md). Por aqui, vamos focar na construção do projeto (integração das ferramentas + explicação teórica).
+
+Em `System > User Manager > Authentication Server` clique em `Add` para criar um server de autenticação RADIUS. Preencha assim:
+
+| Tópicos | Valores |
+| --- | --- |
+| **Descriptive Name** | `Nome do Servidor RADIUS` |
+| **Type** | `RADIUS` |
+| **Protocolo** | `PAP`|
+| **Shared Secret** | `Defina uma senha` |
+| **Authentication Port** | `1812 (porta padrão do RADIUS) |
+
+> **Observação:** Não perca essa senha. Ela serve para autenticação do FreeRADIUS e assinatura dos pacotes RADIUS. Essa senha será usada quando configurarmos o NAS/Client.
+
+> **Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
