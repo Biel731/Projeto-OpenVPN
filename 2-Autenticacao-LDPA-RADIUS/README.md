@@ -27,6 +27,8 @@ Visto isso, vamos acessar nosso LDAP por `https://<ip_do_ldap>:6443/` ou `https:
 
 ## Etapa 2: Configurando o LDAP.
 
+- **Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
+
 Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada parte do nosso diretório.
 
 ![ldap-DN-completo](images/ldap_dn_completo.png)
@@ -48,7 +50,7 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 | **cn** | Common Name (nome comum do objeto) | `cn=lucas luiz` |
 | **DN completo** | Distinguished Name (endereço completo) | `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local` |
 
-> **Observação:** Caso queira ver a configuração do LDAP (como foi constrído essa árvore), [clique aqui:](configuracoes/config-ldpa.md). Por aqui, vamos focar na construção do projeto (integração das ferramentas + explicação teórica).
+> **Observação:** Caso queira ver a configuração do LDAP (como foi construído essa árvore), [clique aqui:](configuracoes/config-ldpa.md). Por aqui, vamos focar na construção do projeto (integração das ferramentas + explicação teórica).
 
 &nbsp;
 
@@ -70,5 +72,43 @@ Preencha os campos com essas informações:
 
 &nbsp;
 
-**Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
+## Etapa 3: Configurando o FreeRADIUS.
 
+Vá em `Services > FreeRADIUS > NAS / Clients` clique em `Add`. 
+
+![nas-client](images/NAS-Client.png)
+
+Preencha os campos com essas informações:
+
+| Tópicos | Valores |
+| --- | --- |
+| Client IP Adress | `127.0.0.1` |
+| Client IP Version | `IPV4` |
+| Client Shortname | `Nome para o cliente` |
+| Client Shared Secret | `Share Secret criada no passo anterior` |
+| Client Protocol | `UDP` |
+| Client Type | `other` |
+
+> Observação: Porque “127.0.0.1”?
+> Como mencionado no [começo do projeto](#️-funcionalidade), boa parte da integração será realizada dentro do próprio firewall. Nesse cenário, por se tratar de tráfego interno, utilizamos o endereço de loopback 127.0.0.1, ajustando apenas a porta de destino, como por exemplo para 1812 (ou seja, 127.0.0.1:1812).
+
+### O que é um NAS/Client?
+
+É o canal de comunicação entre o OpenVPN e o FreeRADIUS. Como a comunicação ocorre dentro do firewall (OpenVPN → FreeRadius e vice-versa) o ip usado para a transferência de dados é o ip de loopback, alterando apenas a porta de destino.
+
+Portanto, devemos ativar os caminhos de autenticação de loopback (127.0.0.1) e LAN (192.168.1.1).
+
+### Configurando a Interface do FreeRADIUS.
+
+Nessa mesma janela, `clique em Interfaces.`
+
+![interfaces-freeradius](images/interfaces-freeradius.png)
+
+Configure assim:
+
+| Tópicos | Valores |
+| --- | --- |
+| Interface IP Address | `*` |
+| Port | `1812` |
+
+Em “Interfaces” é onde configuramos aonde o plugin do FreeRADIUS irá ouvir as solicitações. No nosso caso, definimos que as solicitações seram realizadas na porta 1812, ou seja 127.0.0.1:1812.
