@@ -50,7 +50,11 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 
 > **Observação:** Caso queira ver a configuração do LDAP (como foi constrído essa árvore), [clique aqui:](configuracoes/config-ldpa.md). Por aqui, vamos focar na construção do projeto (integração das ferramentas + explicação teórica).
 
+&nbsp;
+
 Em `System > User Manager > Authentication Server` clique em `Add` para criar um server de autenticação RADIUS. Preencha assim:
+
+![server-radius](images/serverRadius.png)
 
 | Tópicos | Valores |
 | --- | --- |
@@ -61,5 +65,7 @@ Em `System > User Manager > Authentication Server` clique em `Add` para criar um
 | **Authentication Port** | `1812 (porta padrão do RADIUS) |
 
 > **Observação:** Não perca essa senha. Ela serve para autenticação do FreeRADIUS e assinatura dos pacotes RADIUS. Essa senha será usada quando configurarmos o NAS/Client.
+
+&nbsp;
 
 > **Funcionalidade:** Esse configuração será o backend de autenticação do nosso servidor OpenVPN.
