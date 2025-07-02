@@ -93,7 +93,7 @@ Preencha os campos com essas informações:
 | Client Protocol | `UDP` |
 | Client Type | `other` |
 
-> Observação: Porque “127.0.0.1”?
+> **Observação:** Porque “127.0.0.1”?
 > Como mencionado no [começo do projeto](#️-funcionalidade), boa parte da integração será realizada dentro do próprio firewall. Nesse cenário, por se tratar de tráfego interno, utilizamos o endereço de loopback 127.0.0.1, ajustando apenas a porta de destino, como por exemplo para 1812 (ou seja, 127.0.0.1:1812).
 
 &nbsp;
@@ -103,6 +103,8 @@ Preencha os campos com essas informações:
 É o canal de comunicação entre o OpenVPN e o FreeRADIUS. Como a comunicação ocorre dentro do firewall (OpenVPN → FreeRadius e vice-versa) o ip usado para a transferência de dados é o ip de loopback, alterando apenas a porta de destino.
 
 Portanto, devemos ativar os caminhos de autenticação de loopback (127.0.0.1) e LAN (192.168.1.1).
+
+&nbsp;
 
 ### Configurando a Interface do FreeRADIUS.
 
@@ -116,8 +118,38 @@ Configure assim:
 | --- | --- |
 | Interface IP Address | `*` |
 | Port | `1812` |
+| IP Version | `IPV4` |
+| Description | `Breve descrição para identificação.` |
 
-Em “Interfaces” é onde configuramos aonde o plugin do FreeRADIUS irá ouvir as solicitações. No nosso caso, definimos que as solicitações seram realizadas na porta 1812, ou seja 127.0.0.1:1812.
+Em “Interfaces” seção onde configuramos em que endereço e porta o plugin do FreeRADIUS irá escutar as solicitações. No nosso caso, definimos que as requisições serão atendidas em 127.0.0.1:1812 (porta 1812).
+
+> **Observação:** o símbolo * significa “todas as interfaces”.
+> Por isso, usamos * em vez de criar uma regra separada para a interface loopback e outra para a LAN.
 
 &nbsp;
+
+## Etapa 4: Configurando a comunicação com nosso LDAP.
+
+- **Funcionalidade**: Nesta etapa, configuramos a comunicação entre o FreeRADIUS e o nosso servidor LDAP. Os campos `Server Address`, `Identity/Password`, `Base DN` etc. correspondem às credenciais de acesso e ao ponto de partida para navegar na árvore do diretório. Após o FreeRADIUS conectar-se ao LDAP, o plugin executa uma busca (search) na estrutura, usando o filtro definido em `Filter` para localizar o usuário que está sendo autenticado. 
+  
+<mark>Ainda nessa janela, vá em `LDAP` e clique em `Add`.</mark>
+
+[config-LDAP](images/config-LDAP.png)
+
+Para configurarmos essa comunicação, vamos preencher os seguintes campos:
+
+| Tópicos | Valores | Explicação |
+| --- | --- |
+| LDAP Authorization Support | `✅` | Habilita o LDAP | 
+| LDAP Authentication Support | `✅` | Habilita a autenticação no LDAP |
+| Server Address | `192.168.1.100` | Endereço ip onde está o server do LDAP | 
+| Server Port | `389` | Porta para comunicação com LDAP (apenas https) |
+| Identity | `cn=admin,dc=minhaempresa,dc=local` | O domínio do nosso LDAP |
+| Password | `senha para acesso do LDAP` | A senha de acesso do LDAP | 
+| Base DN | `[seu DN completo](#visão-geral-dos-tópicos) - ou=usersEnterprise,dc=minhaempresa,dc=local` | O `DN`completo do LDAP |
+| Filter | `(&(cn=%{User-Name})(objectClass=inetOrgPerson))` | Filtro onde o freeRADIUS irá pesquisar e autenticar o usuário |
+
+&nbsp;
+
+> **Observação:** Como estamos o modo LDAP (http) e não o LDAPS (https), devemos nos certificar de que as caixinhas de checks "Tls", "StartTLS" e "SSL" estejam desativadas. 
 
