@@ -157,4 +157,38 @@ Para configurarmos essa comunicação, vamos preencher os seguintes campos:
 
 > **<mark>Observação:</mark>** Como estamos o modo LDAP (http) e não o LDAPS (https), devemos nos certificar de que as caixinhas de checks "Tls", "StartTLS" e "SSL" estejam desativadas. 
 
+&nbsp;
+
 ## Etapa 5: Configurando o servidor OpenVPN
+
+Como vamos fazer a autenticação via **LDAP**, é recomendável que criemos outro **servidor**, em vez de editarmos o servidor que autenticava via certificados.
+
+Para isso, acesse **VPN > OpenVPN > Wizards.** O assistente (**Wizard**) irá nos ajudar a criar um novo servidor rapidamente.
+
+![wizard-openvpn](images/wizard.png)
+
+- Em **Type of Service** selecione `RADIUS`.
+- Em **RADIUS servers** escolha o server `RADIUS-LDPA` criado na [etapa 2](#etapa-2-configurando-o-ldap)
+- Em  **Certificate Authority** escolha a `CA` criada na integração com os certificados
+- Em **Certificate** escolha o certificado criado pela CA para o server.
+
+Feito isso, chegaremos ao último passo de configuração. 
+
+![server-openvpn](images/server-openvpn_1.png)
+![server-openvpn](images/server-openvpn_2.png)
+
+&nbsp;
+
+Portanto, vamos preencher os campos com essas informações:
+
+| Tópicos | Valores | Explicação |
+| --- | --- | --- |
+| Protocol | `UDP (IPv4)` | Protocolo sem conexão (UDP): melhor desempenho para VPN. |
+| Interface | `WAN` | Interface pela qual o pfSense receberá os pacotes de conexão UDP. |
+| Local Port | `1194` | Porta padrão do OpenVPN. |
+| TLS Configuration | `✅` | Ativa criptografia TLS, garantindo troca segura de certificados e chave. |
+| TLS Key Usage | `Autenticação` | Define que a chave TLS será empregada para autenticar mutuamente cliente e servidor. |
+| IPV4 Tunnel Network | `10.10.10.0/24` | Faixa de endereços que será atribuída aos clientes ao estabelecer o túnel VPN. |
+| Redirect IPV4 | `✅` | Roteia todo o tráfego IPv4 dos clientes pelo túnel VPN, usando exclusivamente o gateway VPN. |
+
+Após isso, clique em `Save` e vamos testar nossa integração.
