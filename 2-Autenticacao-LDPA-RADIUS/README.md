@@ -35,10 +35,10 @@ Nosso LDAP está configurado assim. Vamos segui com as explicações sobre cada 
 
 ![ldap-DN-completo](images/ldap_dn_completo.png)
 
-### Explicação: 
+### Explicação da estrutura: 
 
-- **DN (Distinguished Name):** É o endereço completo de um entry no diretório, ou seja o DN seria `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local.` Cada parte antes da vírgula é um RDN.
-- **RDNs (Relative Distinguished Names):** São as etiquetas que compõem o DN. No nosso caso, seria:
+- **<mark>DN (Distinguished Name):</mark>** É o endereço completo de um entry no diretório, ou seja o DN seria `cn=lucas luiz,ou=usersEnterprise,dc=minhaempresa,dc=local.` Cada parte antes da vírgula é um RDN.
+- **<mark>RDNs (Relative Distinguished Names):</mark>** São as etiquetas que compõem o DN. No nosso caso, seria:
     - **dc=minhaempresa,** **dc=local:** “dc” vem de Domain Component. Define seu domínio LDAP(minhaempresa.local).
     - **ou=usersEnterprise:** “ou” significa Organizational Unit. É como se fosse uma pasta, onde você pode organizar seu LDAP da forma como queira. No nosso caso, é uma pasta onde vamos registrar todos os usuário que vão logar na vpn.
     - **“cn” significa Common Name**. Geralmente é o nome “amigável” ou “comum” do objeto (aqui, o nome do usuário).
@@ -62,6 +62,8 @@ Vá em `System > User Manager > Authentication Server` clique em `Add`.
 
 ![server-radius](images/serverRadius.png)
 
+&nbsp;
+
 Preencha os campos com essas informações:
 
 | Tópicos | Valores |
@@ -81,6 +83,8 @@ Preencha os campos com essas informações:
 Vá em `Services > FreeRADIUS > NAS / Clients` clique em `Add`. 
 
 ![nas-client](images/NAS-Client.png)
+
+&nbsp;
 
 Preencha os campos com essas informações:
 
@@ -131,10 +135,12 @@ Em “Interfaces” seção onde configuramos em que endereço e porta o plugin 
 ## Etapa 4: Configurando a comunicação com nosso LDAP.
 
 - **Funcionalidade**: Nesta etapa, configuramos a comunicação entre o FreeRADIUS e o nosso servidor LDAP. Os campos `Server Address`, `Identity/Password`, `Base DN` etc. correspondem às credenciais de acesso e ao ponto de partida para navegar na árvore do diretório. Após o FreeRADIUS conectar-se ao LDAP, o plugin executa uma busca (search) na estrutura, usando o filtro definido em `Filter` para localizar o usuário que está sendo autenticado. 
-  
-<mark>Ainda nessa janela, vá em `LDAP` e clique em `Add`.</mark>
 
-[config-LDAP](images/config-LDAP.png)
+&nbsp;
+  
+Ainda nessa janela, vá em `LDAP` e clique em `Add`.
+
+![config-LDAP](images/config-LDAP.png)
 
 Para configurarmos essa comunicação, vamos preencher os seguintes campos:
 
@@ -146,10 +152,9 @@ Para configurarmos essa comunicação, vamos preencher os seguintes campos:
 | Server Port | `389` | Porta para comunicação com LDAP (apenas https) |
 | Identity | `cn=admin,dc=minhaempresa,dc=local` | O domínio do nosso LDAP |
 | Password | `senha para acesso do LDAP` | A senha de acesso do LDAP | 
-| Base DN | `[seu DN completo](#visão-geral-dos-tópicos) - ou=usersEnterprise,dc=minhaempresa,dc=local` | O `DN`completo do LDAP |
+| Base DN | [seu DN completo](#visão-geral-dos-tópicos) `- ou=usersEnterprise,dc=minhaempresa,dc=local` | O `DN`completo do LDAP |
 | Filter | `(&(cn=%{User-Name})(objectClass=inetOrgPerson))` | Filtro onde o freeRADIUS irá pesquisar e autenticar o usuário |
 
-&nbsp;
+> **<mark>Observação:</mark>** Como estamos o modo LDAP (http) e não o LDAPS (https), devemos nos certificar de que as caixinhas de checks "Tls", "StartTLS" e "SSL" estejam desativadas. 
 
-> **Observação:** Como estamos o modo LDAP (http) e não o LDAPS (https), devemos nos certificar de que as caixinhas de checks "Tls", "StartTLS" e "SSL" estejam desativadas. 
-
+## Etapa 5: Configurando o servidor OpenVPN
