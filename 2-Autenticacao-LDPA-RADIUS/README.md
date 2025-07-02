@@ -139,7 +139,7 @@ Em “Interfaces” seção onde configuramos em que endereço e porta o plugin 
 Para configurarmos essa comunicação, vamos preencher os seguintes campos:
 
 | Tópicos | Valores | Explicação |
-| --- | --- |
+| --- | --- | --- |
 | LDAP Authorization Support | `✅` | Habilita o LDAP | 
 | LDAP Authentication Support | `✅` | Habilita a autenticação no LDAP |
 | Server Address | `192.168.1.100` | Endereço ip onde está o server do LDAP | 
