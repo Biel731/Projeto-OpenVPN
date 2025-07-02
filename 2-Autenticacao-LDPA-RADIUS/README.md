@@ -163,7 +163,7 @@ Para configurarmos essa comunicação, vamos preencher os seguintes campos:
 
 Como vamos fazer a autenticação via **LDAP**, é recomendável que criemos outro **servidor**, em vez de editarmos o servidor que autenticava via certificados.
 
-Para isso, acesse **VPN > OpenVPN > Wizards.** O assistente (**Wizard**) irá nos ajudar a criar um novo servidor rapidamente.
+Para isso, acesse `**VPN > OpenVPN > Wizards.**` O assistente (**Wizard**) irá nos ajudar a criar um novo servidor rapidamente.
 
 ![wizard-openvpn](images/wizard.png)
 
@@ -172,12 +172,12 @@ Para isso, acesse **VPN > OpenVPN > Wizards.** O assistente (**Wizard**) irá no
 - Em  **Certificate Authority** escolha a `CA` criada na integração com os certificados
 - Em **Certificate** escolha o certificado criado pela CA para o server.
 
+&nbsp;
+
 Feito isso, chegaremos ao último passo de configuração. 
 
 ![server-openvpn](images/server-openvpn_1.png)
 ![server-openvpn](images/server-openvpn_2.png)
-
-&nbsp;
 
 Portanto, vamos preencher os campos com essas informações:
 
@@ -191,4 +191,20 @@ Portanto, vamos preencher os campos com essas informações:
 | IPV4 Tunnel Network | `10.10.10.0/24` | Faixa de endereços que será atribuída aos clientes ao estabelecer o túnel VPN. |
 | Redirect IPV4 | `✅` | Roteia todo o tráfego IPv4 dos clientes pelo túnel VPN, usando exclusivamente o gateway VPN. |
 
-Após isso, clique em `Save` e vamos testar nossa integração.
+Após isso, clique em `Save` e exporte o arquivo `.ovpn` para o cliente em `VPN > OpenVPN > Client Exports`.
+
+&nbsp;
+
+## Etapa 6: Testando nossa integração RADIUS-LDAP.
+
+No diretório onde está o arquivo .ovpn, ao executar o comando `ip a` percebemos que a única interface ativa é a `eth1, com o IP 172.16.10.128`, o que confirma que o cliente está em NAT, fora da rede onde o firewall está.
+
+Após isso, iniciamos a VPN com `sudo openvpn --config nome_do_arquivo.ovpn` e, quando for solicitado o campo AuthUsername, informamos o CN do usuário cadastrado no LDAP (no nosso caso, “lucas luiz”) e, por fim, digitamos a senha desse mesmo usuário.
+
+![server-openvpn](images/cliente_1.png)
+
+A autenticação foi realizada corretamente, pois retornou `“Initialization Sequence Completed”` e agora temos o `IP 10.10.10.2/24 na interface tun0`; como teste, vamos executar um ping em um dos dispositivos da LAN do firewall para verificar se tudo está OK.
+
+![server-openvpn](images/cliente_2.png)
+
+Como mostrado assima, o ping no dispositivo 192.168.1.100foi realizado corretamente sem nenhuma perda nos pacotes. 😁
