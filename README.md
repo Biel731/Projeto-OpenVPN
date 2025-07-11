@@ -36,10 +36,10 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ## 📷 Prints da Funcionalidade:
 
 ### Conexão com a VPN e IP atribuído.
-![config-vpn](sources/config-ovpn.gif)
+![config-vpn](sources/conf-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
-![splunk](sources/splunk.mp4)
+![splunk](sources/splunk.gif)
 
 Linha de comando mostrando sucesso da autenticação
 
