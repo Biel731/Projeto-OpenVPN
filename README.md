@@ -33,16 +33,21 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ❌ Ainda não dockerizado (documentado para execução manual)
 
 
-## 📷 Prints (recomendo adicionar aqui)
-Tela do OpenVPN funcionando
+## 📷 Prints da Funcionalidade:
 
-Resultado do log no Splunk
+### Conexão com a VPN e IP atribuído.
+[config-vpn](sources/config-ovpn.gif)
+
+### Logs OpenVPN e Radiusd no Splunk
+[splunk](sources/splunk.mp4)
 
 Linha de comando mostrando sucesso da autenticação
 
 
 ## 📜 Como rodar (manual)
-Adicione os passos básicos ou um link para o docs/setup.md com os comandos das etapas.
+- Escolha um software de virtualização que você preferir.
+- Instale a imgem do PfSense CE - [link](https://www.pfsense.org/download/)
+- Instale o OpenVPN (Windows) - [link](https://openvpn.net/client/)
 
 
 ## 📚 O que aprendi
