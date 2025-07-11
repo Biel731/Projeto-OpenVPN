@@ -1,7 +1,11 @@
 # 🛡️ Projeto OpenVPN com Autenticação Centralizada e Monitoramento
 
+&nbsp;
+
 ## 📌 Objetivo
 Simular um ambiente corporativo seguro com autenticação centralizada via LDAP + RADIUS para acesso VPN (OpenVPN), e monitoramento de logs via Splunk.
+
+&nbsp;
 
 ## 🧩 Arquitetura
 
@@ -19,6 +23,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
       ▼
   [Splunk]
 
+&nbsp;
 
 ## 📁 Estrutura do Projeto
 | Pasta	| Descrição | 
@@ -26,12 +31,15 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 | `1-Autenticacao-certificados` | Configuração inicial do OpenVPN com autenticação via certificados TLS. |
 | `2-Autenticacao-LDPA-RADIUS` | Integração do OpenVPN com FreeRADIUS + OpenLDAP. |
 | `3-Integracao-com-Splunk` | Configuração do Splunk para coleta e visualização dos logs de autenticação. |
+| `4-Integracao-com-Nessus` | Integração com Nessus para análise de vulnerabilidades. |
 
+&nbsp;
 
 ## 🚧 Status do Projeto
-✅ Funcional nas VMs locais
+✅ Funcional nas VMs locais <br>
 ❌ Ainda não dockerizado (documentado para execução manual)
 
+&nbsp;
 
 ## 📷 Prints da Funcionalidade:
 
@@ -41,18 +49,24 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ### Logs OpenVPN e Radiusd no Splunk
 ![splunk](sources/splunk.gif)
 
-Linha de comando mostrando sucesso da autenticação
+### Analise de Vulnerabilidade com Nessus.
 
+&nbsp;
 
 ## 📜 Como rodar (manual)
 - Escolha um software de virtualização que você preferir.
 - Instale a imgem do PfSense CE - [link](https://www.pfsense.org/download/)
 - Instale o OpenVPN (Windows) - [link](https://openvpn.net/client/)
 
+&nbsp;
 
 ## 📚 O que aprendi
 Estrutura de autenticação real com OpenVPN + RADIUS + LDAP
 
-Leitura e correção de erros do FreeRADIUS
-Encaminhamento e visualização de logs no Splunk
-Prática com logs, autenticação, integração de serviços e simulação de ambiente real
+- Leitura e correção de erros do FreeRADIUS
+- Encaminhamento e visualização de logs no Splunk
+- Prática com logs, autenticação, integração de serviços e simulação de ambiente real
+
+&nbsp;
+
+## 💪🏻 Desafios enfrentados:
