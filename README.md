@@ -46,6 +46,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ![splunk](4-Integracao-Nessus/sources/splunk.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
+![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
 
 &nbsp;
 
@@ -53,6 +54,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 - Escolha um software de virtualização que você preferir.
 - Instale a imgem do PfSense CE - [link](https://www.pfsense.org/download/)
 - Instale o OpenVPN (Windows) - [link](https://openvpn.net/client/)
+- Instale o Nessus - [link](https://www.tenable.com/downloads/nessus?loginAttempted=true)
 
 &nbsp;
 
@@ -66,3 +68,7 @@ Estrutura de autenticação real com OpenVPN + RADIUS + LDAP
 &nbsp;
 
 ## 💪🏻 Desafios enfrentados:
+- Comunicação entre RADIUS e LDAP com `radtest`
+- Comunicação entre OpenVPN e o plugin FreeRadius
+- Regras OpenVPN para acesso do cliente aos hosts da LAN
+- Estruração do LDAP
