@@ -1,11 +1,7 @@
 # 🛡️ Projeto OpenVPN com Autenticação Centralizada e Monitoramento
 
-&nbsp;
-
 ## 📌 Objetivo
 Simular um ambiente corporativo seguro com autenticação centralizada via LDAP + RADIUS para acesso VPN (OpenVPN), e monitoramento de logs via Splunk.
-
-&nbsp;
 
 ## 🧩 Arquitetura
 
@@ -44,10 +40,10 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ## 📷 Prints da Funcionalidade:
 
 ### Conexão com a VPN e IP atribuído.
-![config-vpn](sources/conf-vpn.gif)
+![config-vpn](4-Integracao-Nessus/sources/conf-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
-![splunk](sources/splunk.gif)
+![splunk](4-Integracao-Nessus/sources/splunk.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
 
