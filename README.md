@@ -5,19 +5,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 
 ## 🧩 Arquitetura
 
- [Usuário-VPN]
-      │
-      ▼
-[OpenVPN-Server]
-      │
-      ▼
-[FreeRADIUS]
-      │
-      ▼
-  [OpenLDAP]
-      │
-      ▼
-  [Splunk]
+![Diagrama](4-Integracao-Nessus/sources/Diagrama.png)
 
 &nbsp;
 
