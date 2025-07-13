@@ -8,10 +8,9 @@ O Splunk atua como um SIEM leve e visual. Após a instalação, configuramos uma
 
 Assim, toda a movimentação da rede — incluindo tentativas de conexão VPN, autenticações válidas ou negadas pelo FreeRADIUS, e mensagens geradas pelo LDAP — pode ser monitorada em tempo real. Além disso, o Splunk permite aplicar filtros e criar dashboards com base nos dados recebidos, facilitando a análise forense ou a detecção de comportamentos anômalos no ambiente.
 
+&nbsp;
 
 ## ✅ Competências Adquiridas:
-
-✅ Competências Adquiridas com o projeto:
 
 Esse projeto reuniu conceitos importantes de:
 

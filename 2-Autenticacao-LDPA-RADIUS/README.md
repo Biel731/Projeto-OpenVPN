@@ -9,6 +9,8 @@ Em seguida, o OpenVPN solicita as credenciais (usuário e senha cadastrados no L
 
 Se o LDAP confirmar que o usuário e a senha são válidos, o FreeRADIUS retorna um Access-Accept ao OpenVPN, que finaliza o processo de autenticação (sem encerrar a troca TLS). Ao receber o Access-Accept, o OpenVPN conclui o handshake de dados e estabelece automaticamente o túnel VPN na faixa de IP configurada em VPN > OpenVPN > Servers. A partir daí, o cliente pode trafegar pela rede privada conforme as rotas e políticas definidas.
 
+&nbsp;
+
 ## ✅ Competências Adquiridas:
 
 - Administração de Acesso Centralizado

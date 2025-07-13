@@ -1,23 +1,23 @@
-# Integração com SIEM Splunk para análise de logs.
+# Integração com Nessus para análise de vulnerabilidade na rede LAN.
 
-## ⚙️ Funcionalidade:
+## 🛡️ Funcionalidade:
+Neste projeto, integramos o scanner de vulnerabilidades Nessus ao ambiente de rede acessado via VPN. O objetivo é identificar falhas de segurança de forma segura e eficiente, sem impactar os serviços ativos no ambiente.
 
-Neste projeto, o Splunk foi instalado em uma máquina Kali Linux com o objetivo de centralizar e visualizar logs de segurança de forma prática. O foco principal é monitorar eventos relacionados ao ambiente VPN com autenticação via OpenVPN + RADIUS + LDAP, já previamente configurado.
+Após autenticação e recebimento do IP da faixa 10.10.10.0/24, o Nessus é configurado para escanear toda a rede interna 192.168.1.0/24. Ativamos a descoberta de hosts via ping, utilizando métodos como TCP, ARP e ICMP — excetuando o UDP para evitar falsos alertas e interferências em serviços sensíveis como o Splunk e o OpenVPN.
 
-O Splunk atua como um SIEM leve e visual. Após a instalação, configuramos uma entrada de dados via UDP na porta 514, permitindo o recebimento de logs de firewall, tentativas de autenticação e falhas diversas. O pfSense foi configurado para enviar seus logs via syslog diretamente para o IP da máquina Kali, onde o Splunk está escutando.
+Durante o escaneamento de portas, utilizamos os métodos TCP connect e TCP SYN, garantindo precisão sem comprometer o tempo de execução. Também ativamos a verificação de malwares, direcionada a diretórios padrão de sistemas Windows e Linux.
 
-Assim, toda a movimentação da rede — incluindo tentativas de conexão VPN, autenticações válidas ou negadas pelo FreeRADIUS, e mensagens geradas pelo LDAP — pode ser monitorada em tempo real. Além disso, o Splunk permite aplicar filtros e criar dashboards com base nos dados recebidos, facilitando a análise forense ou a detecção de comportamentos anômalos no ambiente.
+Por fim, os relatórios gerados destacam os hosts ativos (que responderam ao ping), permitindo melhor visibilidade da superfície de ataque da rede.
 
+&nbsp;
 
 ## ✅ Competências Adquiridas:
 
-✅ Competências Adquiridas com o projeto:
-
 Esse projeto reuniu conceitos importantes de:
 
-- Instalação de uma solução SIEM.
-- Coleta e centralização de logs de segurança em tempo real.
-- Integração de dispositivos de rede (como pfSense) com ferramentas de monitoramento.
-- Análise e identificação de eventos suspeitos a partir de logs.
-- Gerenciamento de logs de autenticação e falhas de acesso
-- Noções de segurança operacional e visibilidade em redes corporativas
+- Configuração de um scanner de vulnerabilidades (Nessus) em ambiente corporativo.
+- Definição segura de escopos e métodos de varredura para evitar impactos operacionais.
+- Otimização de escaneamentos (evitando UDP, escolhendo métodos eficientes).
+- Análise de ativos visíveis na rede e sua exposição a riscos.
+- Interpretação de relatórios de vulnerabilidade e identificação de potenciais ameaças.
+- Aplicação de boas práticas em varredura de redes protegidas por VPN.
