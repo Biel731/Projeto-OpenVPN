@@ -16,6 +16,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 | `2-Autenticacao-LDPA-RADIUS` | Integração do OpenVPN com FreeRADIUS + OpenLDAP. |
 | `3-Integracao-com-Splunk` | Configuração do Splunk para coleta e visualização dos logs de autenticação. |
 | `4-Integracao-com-Nessus` | Integração com Nessus para análise de vulnerabilidades. |
+| `5-Integracao-com-Wazuh` | Integração com Wazuh para monitoramento dos hosts.  |
 
 &nbsp;
 
