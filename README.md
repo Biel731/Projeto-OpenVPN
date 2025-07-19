@@ -5,7 +5,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 
 ## 🧩 Arquitetura
 
-![Diagrama](4-Integracao-Nessus/sources/Diagrama.png)
+![Diagrama](4-Integracao-Nessus/sources/Diagrama-1.png)
 
 &nbsp;
 
@@ -28,13 +28,16 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 
 ## 📷 Prints da Funcionalidade:
 
-### Conexão com a VPN e IP atribuído.
+### Conexão com a VPN e atribuição do IP.
 ![config-vpn](4-Integracao-Nessus/sources/conf-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
 ![splunk](4-Integracao-Nessus/sources/splunk.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
+![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
+
+### Monitoramento dos host Wazuh Agent.
 ![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
 
 &nbsp;
