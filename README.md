@@ -1,7 +1,15 @@
 # 🛡️ Projeto OpenVPN com Autenticação Centralizada e Monitoramento
 
 ## 📌 Objetivo
-Simular um ambiente corporativo seguro com autenticação centralizada via LDAP + RADIUS para acesso VPN (OpenVPN), e monitoramento de logs via Splunk.
+Simular um ambiente corporativo seguro com foco em autenticação centralizada, segmentação de rede e monitoramento contínuo. O projeto utiliza OpenVPN integrado ao FreeRADIUS e OpenLDAP para controle de acesso via VPN, garantindo autenticação de usuários com base em diretórios corporativos. A solução também incorpora:
+
+- **Splunk**, para coleta e análise de logs de autenticação, conexão e eventos de rede;
+
+- **Wazuh**, para monitoramento de endpoints com verificação de integridade de arquivos (FIM), resposta automatizada a incidentes (Active Response) e simulação de políticas de DLP;
+
+- **Nessus**, como ferramenta de varredura de vulnerabilidades na rede interna, identificando possíveis pontos de risco expostos após a conexão do cliente VPN.
+
+Todo o ambiente é segmentado em VLANs (dados críticos como servers e logs), com regras de firewall específicas para restringir a comunicação entre os serviços, simulando uma infraestrutura corporativa segura.
 
 ## 🧩 Arquitetura
 
@@ -51,11 +59,18 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 &nbsp;
 
 ## 📚 O que aprendi
-Estrutura de autenticação real com OpenVPN + RADIUS + LDAP
+Este projeto me proporcionou uma experiência prática com os principais componentes de um mini-SOC (Security Operations Center), permitindo a integração de soluções reais em um ambiente de laboratório simulado. Os principais aprendizados incluem:
 
-- Leitura e correção de erros do FreeRADIUS
-- Encaminhamento e visualização de logs no Splunk
-- Prática com logs, autenticação, integração de serviços e simulação de ambiente real
+- Criação de uma estrutura de autenticação corporativa, utilizando OpenVPN integrada ao FreeRADIUS e a um servidor LDAP para controle centralizado de acesso.
+- Configuração do FreeRADIUS para autenticação com base em LDAP, incluindo testes de login, filtros de consulta e afins.
+- Encaminhamento e análise de logs no Splunk, com foco em eventos críticos de autenticação, conexão VPN, execução de serviços e segurança de rede.
+- Integração e comunicação entre diferentes serviços (OpenVPN, RADIUS, LDAP, Splunk, Nessus, Wazuh) em uma rede segmentada, com VLANs e regras de firewall aplicadas.
+- Simulação de um ambiente de segurança defensiva, com:
+    -Escaneamento de vulnerabilidades via Nessus
+    -Monitoramento de endpoints com Wazuh **(FIM, DLP, Active Response);**
+    -Análise e resposta a incidentes de forma automatizada.
+- Prática com logs reais, reforçando a habilidade de identificar eventos suspeitos, entender o fluxo de autenticação e realizar análises forenses básicas.
+- Criação de regras de rede e segmentação com VLANs, aumentando a segurança e controle do tráfego entre serviços sensíveis.
 
 &nbsp;
 
