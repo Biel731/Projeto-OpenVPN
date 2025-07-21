@@ -29,7 +29,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ## 📷 Prints da Funcionalidade:
 
 ### Conexão com a VPN e atribuição do IP.
-![config-vpn](4-Integracao-Nessus/sources/conf-vpn.gif)
+![config-vpn](4-Integracao-Nessus/sources/config-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
 ![splunk](4-Integracao-Nessus/sources/splunk.gif)
@@ -38,7 +38,7 @@ Simular um ambiente corporativo seguro com autenticação centralizada via LDAP 
 ![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
 
 ### Monitoramento dos host Wazuh Agent.
-![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
+![wazuh](4-Integracao-Nessus/sources/config-wazuh.gif)
 
 &nbsp;
 
@@ -62,5 +62,7 @@ Estrutura de autenticação real com OpenVPN + RADIUS + LDAP
 ## 💪🏻 Desafios enfrentados:
 - Comunicação entre RADIUS e LDAP com `radtest`
 - Comunicação entre OpenVPN e o plugin FreeRadius
+- Configuração e funcionamento correto da Vlan
+- Funcionamento do Splunk em uma Vlan
 - Regras OpenVPN para acesso do cliente aos hosts da LAN
 - Estruração do LDAP

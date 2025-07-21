@@ -1,23 +1,20 @@
-# Integração com Nessus para análise de vulnerabilidade na rede LAN.
+# Integração com Wazuh para simulação de endpoint com FIM, Active Response e DLP
 
-## 🛡️ Funcionalidade:
-Neste projeto, integramos o scanner de vulnerabilidades Nessus ao ambiente de rede acessado via VPN. O objetivo é identificar falhas de segurança de forma segura e eficiente, sem impactar os serviços ativos no ambiente.
+## ⚙️ Funcionalidade:
+Neste projeto, integramos o Wazuh como solução de monitoramento de endpoints, simulando um sistema real de proteção e resposta a incidentes.
 
-Após autenticação e recebimento do IP da faixa 10.10.10.0/24, o Nessus é configurado para escanear toda a rede interna 192.168.1.0/24. Ativamos a descoberta de hosts via ping, utilizando métodos como TCP, ARP e ICMP — excetuando o UDP para evitar falsos alertas e interferências em serviços sensíveis como o Splunk e o OpenVPN.
+O objetivo foi monitorar a integridade de arquivos sensíveis (FIM - File Integrity Monitoring) e aplicar medidas automatizadas de contenção (Active Response) em caso de alterações suspeitas. Quando um arquivo protegido é editado, o Wazuh dispara um alerta e executa um script de bloqueio de IP via iptables, prevenindo possíveis ações maliciosas ou vazamentos de dados.
 
-Durante o escaneamento de portas, utilizamos os métodos TCP connect e TCP SYN, garantindo precisão sem comprometer o tempo de execução. Também ativamos a verificação de malwares, direcionada a diretórios padrão de sistemas Windows e Linux.
+Essa automação simula a função de um DLP (Data Loss Prevention) ao impedir a continuidade de ações após a modificação de arquivos sensíveis, como documentos internos ou diretórios críticos. Toda a resposta ocorre diretamente no endpoint, reforçando o conceito de proteção distribuída e ativa.
 
-Por fim, os relatórios gerados destacam os hosts ativos (que responderam ao ping), permitindo melhor visibilidade da superfície de ataque da rede.
-
-&nbsp;
-
+ 
 ## ✅ Competências Adquiridas:
 
-Esse projeto reuniu conceitos importantes de:
+Esse projeto explorou conceitos fundamentais de:
 
-- Configuração de um scanner de vulnerabilidades (Nessus) em ambiente corporativo.
-- Definição segura de escopos e métodos de varredura para evitar impactos operacionais.
-- Otimização de escaneamentos (evitando UDP, escolhendo métodos eficientes).
-- Análise de ativos visíveis na rede e sua exposição a riscos.
-- Interpretação de relatórios de vulnerabilidade e identificação de potenciais ameaças.
-- Aplicação de boas práticas em varredura de redes protegidas por VPN.
+- Monitoramento de integridade de arquivos em tempo real (FIM).
+- Criação e customização de respostas automatizadas a eventos (Active Response).
+- Simulação de políticas de prevenção à perda de dados (DLP).
+- Integração de agentes Wazuh em ambientes de rede segmentados (Vlan).
+- Uso de regras do Wazuh para detectar e responder a comportamentos anômalos no endpoint.
+- Aplicação prática de medidas defensivas com iptables.
