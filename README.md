@@ -13,7 +13,6 @@ Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs)
 
 ## 🧩 Arquitetura
 
-![Diagrama-da-rede](./4-Integracao-Nessus/sources/upscalemedia-transformed.png)
 
 &nbsp;
 
