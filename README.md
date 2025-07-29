@@ -9,11 +9,11 @@ Simular um ambiente corporativo seguro com foco em autenticação centralizada, 
 
 - **Nessus**, como ferramenta de varredura de vulnerabilidades na rede interna, identificando possíveis pontos de risco expostos após a conexão do cliente VPN.
 
-Todo o ambiente é segmentado em VLANs (dados críticos como servers e logs), com regras de firewall específicas para restringir a comunicação entre os serviços, simulando uma infraestrutura corporativa segura.
+Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs), com regras de firewall específicas para restringir a comunicação entre os serviços, simulando uma infraestrutura corporativa segura.
 
 ## 🧩 Arquitetura
 
-![Diagrama](4-Integracao-Nessus/sources/Diagrama-1.png)
+![Diagrama](4-Integracao-Nessus/sources/Diagrama-3.png)
 
 &nbsp;
 
