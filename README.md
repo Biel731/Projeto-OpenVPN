@@ -40,7 +40,7 @@ Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs)
 ![config-vpn](sources/config-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
-![splunk](sources/splunk.gif)
+![splunk](sources/splunk-new.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
 ![nessus](sources/config-nessus.gif)
