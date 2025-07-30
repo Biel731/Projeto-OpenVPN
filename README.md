@@ -13,7 +13,7 @@ Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs)
 
 ## 🧩 Arquitetura
 
-![Diagrama](4-Integracao-Nessus/sources/upscalemedia-transformed.png)
+![Diagrama](sources/diagrama.png)
 
 &nbsp;
 
@@ -37,16 +37,16 @@ Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs)
 ## 📷 Prints da Funcionalidade:
 
 ### Conexão com a VPN e atribuição do IP.
-![config-vpn](4-Integracao-Nessus/sources/config-vpn.gif)
+![config-vpn](sources/config-vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
-![splunk](4-Integracao-Nessus/sources/splunk.gif)
+![splunk](sources/splunk.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
-![nessus](4-Integracao-Nessus/sources/config-nessus.gif)
+![nessus](sources/config-nessus.gif)
 
 ### Monitoramento dos host Wazuh Agent.
-![wazuh](4-Integracao-Nessus/sources/config-wazuh.gif)
+![wazuh](sources/config-wazuh.gif)
 
 &nbsp;
 
