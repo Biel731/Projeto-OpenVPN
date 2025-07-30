@@ -37,16 +37,16 @@ Todo o ambiente é **segmentado em VLANs** (dados críticos como servers e logs)
 ## 📷 Prints da Funcionalidade:
 
 ### Conexão com a VPN e atribuição do IP.
-![config-vpn](sources/config-vpn.gif)
+![config-vpn](sources/vpn.gif)
 
 ### Logs OpenVPN e Radiusd no Splunk
 ![splunk](sources/splunk-new.gif)
 
 ### Analise de Vulnerabilidade com Nessus.
-![nessus](sources/config-nessus.gif)
+![nessus](sources/nessus.gif)
 
-### Monitoramento dos host Wazuh Agent.
-![wazuh](sources/config-wazuh.gif)
+### Monitoramento, FIM, Active Response e DLP com Wazuh.
+![wazuh](sources/wazuh.gif)
 
 &nbsp;
 
